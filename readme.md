@@ -1,54 +1,29 @@
-# Шаблон для выполнения тестового задания
+## Как запустить?
 
-## Описание
-Шаблон подготовлен для того, чтобы попробовать сократить трудоемкость выполнения тестового задания.
+```
+Сначала заполните .env variables:
 
-В шаблоне настоены контейнеры для `postgres` и приложения на `nodejs`.  
-Для взаимодействия с БД используется `knex.js`.  
-В контейнере `app` используется `build` для приложения на `ts`, но можно использовать и `js`.
+BASE_URL=https://common-api.wildberries.ru/api/v1
 
-Шаблон не является обязательным!\
-Можно использовать как есть или изменять на свой вкус.
+API_KEY=(ключ)
 
-Все настройки можно найти в файлах:
-- compose.yaml
-- dockerfile
-- package.json
-- tsconfig.json
-- src/config/env/env.ts
-- src/config/knex/knexfile.ts
+GOOGLE_SERVICE_ACCOUNT=(содержимое сервисного файла в формате base64)
 
-## Команды:
+GOOGLE_API_SCOPE=https://www.googleapis.com/auth/spreadsheets
 
-Запуск базы данных:
-```bash
-docker compose up -d --build postgres
+GOOGLE_SHEETS_SORT_BY=boxDeliveryBase(коэффициент для сортировки sheets из API)
+
+GOOGLE_SHEET_ID_LIST=(Список id sheets через запятую (например: Asdc23432,ASsadasdas,AW32sdc))
 ```
 
-Для выполнения миграций и сидов не из контейнера:
-```bash
-npm run knex:dev migrate latest
+Затем вызовите docker compose up
+
+```
+Для проверки работы есть endpoint (чтобы не ждать пока придет час для обновления данных):
+/api/v1/tariffs/box/
+Должно обновить данные на сегоднящний день и выгрузить на sheets
+
+Если возвращает статус 200 OK, значит все прошло успешно
 ```
 
-```bash
-npm run knex:dev seed run
-```
-Также можно использовать и остальные команды (`migrate make <name>`,`migrate up`, `migrate down` и т.д.)
-
-Для запуска приложения в режиме разработки:
-```bash
-npm run dev
-```
-
-Запуск проверки самого приложения:
-```bash
-docker compose up -d --build app
-```
-
-Для финальной проверки рекомендую:
-```bash
-docker compose down --rmi local --volumes
-docker compose up --build
-```
-
-PS: С наилучшими пожеланиями!
+У меня возникла проблема с 5000 портом в системе(видимо занят другим сервисом поэтому я использовал 4000)

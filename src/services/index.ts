@@ -1,0 +1,1 @@
+export * from "./tariffs_box.fetch.update.service.js";

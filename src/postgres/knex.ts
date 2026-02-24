@@ -40,6 +40,12 @@ function logSeedMake(name: string) {
     console.log(`Created seed: ${name.split(/\/|\\/).pop()}`);
 }
 
+function createStructureIfNotExists() {
+    if(!knex.schema.hasTable("tariffs_box")) {
+        
+    }
+}
+
 export const migrate = {
     latest: async () => {
         logMigrationResults("latest", await knex.migrate.latest());

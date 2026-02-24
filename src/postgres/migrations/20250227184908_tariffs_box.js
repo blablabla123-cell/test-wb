@@ -3,7 +3,7 @@
  * @returns {Promise<void>}
  */
 export async function up(knex) {
-    await knex.schema.createTable("tariffs_box", table => {
+     await knex.schema.createTable("tariffs_box", table => {
         // No need to hold the id, I guess
         table.string("date", 10).notNullable();
         // Warehouse
@@ -38,5 +38,5 @@ export async function up(knex) {
  * @returns {Promise<void>}
  */
 export async function down(knex) {
-    await knex.schema.dropTable("tariffs_box");
+      await knex.schema.dropTable("tariffs_box");
 }

@@ -2,3 +2,7 @@ node_modules
 .local
 .env
 dist
+.vscode
+.DS_Store
+
+service-account.json
